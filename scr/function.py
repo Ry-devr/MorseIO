@@ -29,27 +29,30 @@ MORSE = {
     '$': '...-..-','@': '.--.-.', ' ': '/'
 }  # Nao é uma lista mais sim um dicionario
 
-MORSE_INVE = {valor: chave for chave, valor in MORSE.items()} # De forma invertida
 #############
 ## FUNÇÔES ##
 #############
+class Traduzir:
+    def __init__(self):
+        self.morse = MORSE
+        self.morse_inve = {valor: chave for chave, valor in MORSE.items()} # De forma invertida
 
-def t_para_m(frase):
-    letras = list(frase.strip().upper()) 
-    frase_morse = [] # Vou precisar disso depois
-    for l in letras:
-        frase_morse.append(MORSE[l])
+    def texto_para_morse(self, frase):
+        letras = list(frase.strip().upper()) 
+        frase_morse = []
+        for l in letras:
+            frase_morse.append(self.morse[l])
 
-    return "".join(frase_morse)
+        return "".join(frase_morse)
 
-def m_para_t(frase_M):
-    palavras_morse = frase_M.strip().split("/") # A barra serve para dividir sendo usado como espaço
-    frase_textu = []
+    def morse_para_texto(self, frase_M):
+        palavras_morse = frase_M.strip().split("/") # A barra serve para dividir sendo usado como espaço
+        frase_textu = []
 
-    for l in palavras_morse:
-        letras_morse = l.split()
-        letras = (MORSE_INVE[L] for L in letras_morse)
-        frase_textu.append("".join(letras))
+        for l in palavras_morse:
+            letras_morse = l.split()
+            letras = (self.morse_inve[L] for L in letras_morse)
+            frase_textu.append("".join(letras))
 
-    return " ".join(frase_textu)
+        return " ".join(frase_textu) 
 

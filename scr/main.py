@@ -1,5 +1,5 @@
 import function
-
+tradutor = function.Traduzir()
 while True:
     print("Opçoes: ")
 
@@ -12,13 +12,13 @@ while True:
     
     if opcao == 1:
         frase = input("Digite:\n=> ")
-        print(function.t_para_m(frase))
 
+        print(tradutor.texto_para_morse(frase))
     elif opcao == 2:
         while True:
             try:
                 frase = input("Digite:\n=> ")
-                print(function.m_para_t(frase))
+                print(tradutor.morse_para_texto(frase))
                 break
             except:
                 print("ERRO: Valor invalido")
