@@ -32,7 +32,7 @@ MORSE = {
 #############
 ## FUNÇÔES ##
 #############
-class Traduzir:
+class TradutorMorse:
     def __init__(self):
         self.morse = MORSE
         self.morse_inve = {valor: chave for chave, valor in MORSE.items()} # De forma invertida
