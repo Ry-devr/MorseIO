@@ -43,7 +43,7 @@ class TradutorMorse:
         for l in letras:
             frase_morse.append(self.morse[l])
 
-        return "".join(frase_morse)
+        return " ".join(frase_morse)
 
     def morse_para_texto(self, frase_M):
         palavras_morse = frase_M.strip().split("/") # A barra serve para dividir sendo usado como espaço
@@ -56,3 +56,6 @@ class TradutorMorse:
 
         return " ".join(frase_textu) 
 
+class OpcoesMenu:
+    def __init__(self): 
+        pass

@@ -1,11 +1,14 @@
-from typing_extensions import runtime
 import function
-import time
 from os import system, name
 
-input("Presione ENTER para continuar...") # Uma pausa antes de limpar a tela 
-system("cls" if name == "nt" else "clear") # limpar o terminal quando iniciar o programa
+def limpar_terminal():
+    try: 
+        input("Presione ENTER para continuar...")
+        system("cls" if name == "nt" else "clear")
+    except:
+        pass
 
+limpar_terminal()
 tradutor = function.TradutorMorse()
 
 print('''
@@ -18,10 +21,15 @@ print('''
  █████     █████░░██████  █████     ██████ ░░██████  █████░░██████ 
 ░░░░░     ░░░░░  ░░░░░░  ░░░░░     ░░░░░░   ░░░░░░  ░░░░░  ░░░░░░  
 
------.-.-.-....---
+-- --- .-. ... . .. ---
 ''')
-
+cnt = 0
 while True:
+    if cnt > 0:
+        limpar_terminal()
+    else:
+        cnt = 1
+
     print('''
 ========================================
                 OPÇOES
@@ -30,7 +38,6 @@ while True:
   [2] Traduzir morse → texto
   [4] Histórico
   [5] Configurações
-  [6] Limpar terminal
   [0] Sair
 ========================================
 Escolha uma opção:
@@ -41,11 +48,13 @@ Escolha uma opção:
             break
         except:
             print("ERRO: Valor invalido ou nao exite")
-    
+
+    ### Traduzir texto ###
     if opcao == 1:
         frase = input("Digite:\n=> ")
-        time.sleep(2)
         print("Resultado:", tradutor.texto_para_morse(frase))
+
+    ### Traduzir morce ###
     elif opcao == 2:
         while True:
             try:
@@ -54,9 +63,8 @@ Escolha uma opção:
                 break
             except:
                 print("ERRO: Valor invalido")
-
-    elif opcao == 6:
-        system("cls" if name == "nt" else "clear")
+    
+    ### Sair ###
     elif opcao == 0:
         break
 
