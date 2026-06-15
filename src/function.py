@@ -1,3 +1,6 @@
+from os import system, name
+
+
 ##########################
 #### BIBLIOTECA MORSE ####
 ##########################
@@ -32,6 +35,16 @@ MORSE = {
 #############
 ## FUNÇÔES ##
 #############
+
+# limpar o terminal
+def limpar_terminal():
+    try: 
+        input("Presione ENTER para continuar...")
+        system("cls" if name == "nt" else "clear")
+    except:
+        pass
+
+# class para traduzir
 class TradutorMorse:
     def __init__(self):
         self.morse = MORSE
@@ -56,6 +69,4 @@ class TradutorMorse:
 
         return " ".join(frase_textu) 
 
-class OpcoesMenu:
-    def __init__(self): 
-        pass
+

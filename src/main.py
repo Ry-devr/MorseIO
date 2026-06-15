@@ -1,14 +1,6 @@
 import function
-from os import system, name
 
-def limpar_terminal():
-    try: 
-        input("Presione ENTER para continuar...")
-        system("cls" if name == "nt" else "clear")
-    except:
-        pass
-
-limpar_terminal()
+function.limpar_terminal()
 tradutor = function.TradutorMorse()
 
 print('''
@@ -23,12 +15,12 @@ print('''
 
 -- --- .-. ... . .. ---
 ''')
-cnt = 0
+jarodou = 0
 while True:
-    if cnt > 0:
-        limpar_terminal()
+    if jarodou > 0:
+        function.limpar_terminal()
     else:
-        cnt = 1
+        jarodou = 1
 
     print('''
 ========================================
@@ -51,8 +43,13 @@ Escolha uma opção:
 
     ### Traduzir texto ###
     if opcao == 1:
-        frase = input("Digite:\n=> ")
-        print("Resultado:", tradutor.texto_para_morse(frase))
+        while True:
+            try:
+                frase = input("Digite:\n=> ")
+                print("Resultado:", tradutor.texto_para_morse(frase))
+                break
+            except KeyError as e:
+                print(f"CARACTER INVALIDO:{e}, tente novamente ")
 
     ### Traduzir morce ###
     elif opcao == 2:
@@ -61,11 +58,13 @@ Escolha uma opção:
                 frase = input("Digite:\n=> ")
                 print(tradutor.morse_para_texto(frase))
                 break
-            except:
-                print("ERRO: Valor invalido")
-    
+            except KeyError as a:
+                print(f"CARACTER IVALIDO: {a}, tente novamente")
+ 
     ### Sair ###
     elif opcao == 0:
+        print("saindo...")
+        function.limpar_terminal()
         break
 
 
