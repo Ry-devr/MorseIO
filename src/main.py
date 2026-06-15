@@ -1,7 +1,10 @@
-import function
+from function import TradutorMorse, limpar_terminal
+from gerenciador_arquivo import GerenciadorArquivo
 
-function.limpar_terminal()
-tradutor = function.TradutorMorse()
+
+limpar_terminal()
+tradutor = TradutorMorse()
+gereArquivo = GerenciadorArquivo("historico.csv")
 
 print('''
  ██████   ██████                                     █████         
@@ -18,7 +21,7 @@ print('''
 jarodou = 0
 while True:
     if jarodou > 0:
-        function.limpar_terminal()
+        limpar_terminal()
     else:
         jarodou = 1
 
@@ -46,8 +49,18 @@ Escolha uma opção:
         while True:
             try:
                 frase = input("Digite:\n=> ")
-                print("Resultado:", tradutor.texto_para_morse(frase))
-                break
+                resultado = tradutor.texto_para_morse(frase)
+                print("Resultado:", resultado)
+
+                historico = gereArquivo.recuperaDados()
+                historico.append([frase, resultado, "texto -> morse"])
+                gereArquivo.salvarDados(historico)
+
+                tentar = input("Quer tentar novamente (s,n)? ").lower().strip()
+                if tentar in ["s","sim", ""]:
+                    pass
+                elif tentar in ["n","nao","não"]:
+                    break
             except KeyError as e:
                 print(f"CARACTER INVALIDO:{e}, tente novamente ")
 
@@ -55,8 +68,13 @@ Escolha uma opção:
     elif opcao == 2:
         while True:
             try:
-                frase = input("Digite:\n=> ")
-                print(tradutor.morse_para_texto(frase))
+                morse = input("Digite:\n=> ")
+                resultado = tradutor.morse_para_texto(morse)
+                print("Resultado", resultado)
+
+                historicoM = gereArquivo.recuperaDados()
+                historicoM.append([morse, resultado, "Morse -> texto"])
+                gereArquivo.salvarDados(historicoM)
                 break
             except KeyError as a:
                 print(f"CARACTER IVALIDO: {a}, tente novamente")
@@ -64,7 +82,7 @@ Escolha uma opção:
     ### Sair ###
     elif opcao == 0:
         print("saindo...")
-        function.limpar_terminal()
+        limpar_terminal()
         break
 
 
