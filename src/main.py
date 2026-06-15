@@ -32,7 +32,6 @@ while True:
   [1] Traduzir texto → morse
   [2] Traduzir morse → texto
   [3] Histórico
-  [5] Configurações
   [0] Sair
 ========================================
 Escolha uma opção:
@@ -51,17 +50,18 @@ Escolha uma opção:
                 frase = input("Digite:\n=> ")
                 resultado = tradutor.texto_para_morse(frase)
                 print("Resultado:", resultado)
-                reproduzir_morse_async(resultado)
-                sleep(1)
+                # reproduzir_morse_async(resultado)
+                # sleep(1)
 
                 historico = gereArquivo.recuperaDados()
                 historico.append([frase, resultado, "texto -> morse"])
                 gereArquivo.salvarDados(historico)
 
-                # if tentar in ["s","sim", ""]:
-                #     pass
-                # elif tentar in ["n","nao","não"]:
-                #     break
+                tentar = input("Quer tentar novamente (s,n)? ").lower().strip()
+                if tentar in ["s","sim", ""]:
+                    pass
+                elif tentar in ["n","nao","não"]:
+                    break
             except KeyError as e:
                 print(f"CARACTER INVALIDO:{e}, tente novamente ")
 

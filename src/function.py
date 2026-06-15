@@ -44,6 +44,10 @@ def limpar_terminal():
     except:
         pass
 
+#####################
+## NAO FUNCIONANDO ##
+#####################
+
 
 def beep(duracao):
     if platform.system() == "Windows": # verifica se o sistema é windows ou linux/mac
@@ -75,7 +79,10 @@ def reproduzir_morse_async(codigo):
     t = threading.Thread(target=reproduzir_morse, args=(codigo,))
     t.start()
 
-# class para traduzir
+#########################
+## class para traduzir ##
+#########################
+
 class TradutorMorse:
     def __init__(self):
         self.morse = MORSE
