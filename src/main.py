@@ -1,6 +1,6 @@
-from function import TradutorMorse, limpar_terminal
+from function import TradutorMorse, limpar_terminal, reproduzir_morse_async
 from gerenciador_arquivo import GerenciadorArquivo
-
+from time import sleep
 
 limpar_terminal()
 tradutor = TradutorMorse()
@@ -51,16 +51,17 @@ Escolha uma opção:
                 frase = input("Digite:\n=> ")
                 resultado = tradutor.texto_para_morse(frase)
                 print("Resultado:", resultado)
+                reproduzir_morse_async(resultado)
+                sleep(1)
 
                 historico = gereArquivo.recuperaDados()
                 historico.append([frase, resultado, "texto -> morse"])
                 gereArquivo.salvarDados(historico)
 
-                tentar = input("Quer tentar novamente (s,n)? ").lower().strip()
-                if tentar in ["s","sim", ""]:
-                    pass
-                elif tentar in ["n","nao","não"]:
-                    break
+                # if tentar in ["s","sim", ""]:
+                #     pass
+                # elif tentar in ["n","nao","não"]:
+                #     break
             except KeyError as e:
                 print(f"CARACTER INVALIDO:{e}, tente novamente ")
 
