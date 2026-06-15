@@ -39,7 +39,7 @@ MORSE = {
 # limpar o terminal
 def limpar_terminal():
     try: 
-        input("Presione ENTER para continuar...")
+        input("Presione ENTER para continuar/limpar...")
         system("cls" if name == "nt" else "clear")
     except:
         pass

@@ -31,7 +31,7 @@ while True:
 ========================================
   [1] Traduzir texto → morse
   [2] Traduzir morse → texto
-  [4] Histórico
+  [3] Histórico
   [5] Configurações
   [0] Sair
 ========================================
@@ -78,6 +78,12 @@ Escolha uma opção:
                 break
             except KeyError as a:
                 print(f"CARACTER IVALIDO: {a}, tente novamente")
+
+
+    elif opcao == 3:
+        historico = gereArquivo.recuperaDados()
+        for h in historico:
+            print(f"[{h[2]}] {h[0]} -> {h[1]}")
  
     ### Sair ###
     elif opcao == 0:
