@@ -1,6 +1,5 @@
-from function import TradutorMorse, limpar_terminal, reproduzir_morse_async
+from function import TradutorMorse, limpar_terminal, reproduzir_morse
 from gerenciador_arquivo import GerenciadorArquivo
-from time import sleep
 
 limpar_terminal()
 tradutor = TradutorMorse()
@@ -40,8 +39,12 @@ Escolha uma opção:
         try:
             opcao = int(input("=> "))
             break
-        except:
+        except ValueError:
             print("ERRO: Valor invalido ou nao exite")
+        except EOFError:
+            print()
+            opcao = -1
+            break
 
     ### Traduzir texto ###
     if opcao == 1:
@@ -50,8 +53,7 @@ Escolha uma opção:
                 frase = input("Digite:\n=> ")
                 resultado = tradutor.texto_para_morse(frase)
                 print("Resultado:", resultado)
-                # reproduzir_morse_async(resultado)
-                # sleep(1)
+                reproduzir_morse(resultado)
 
                 historico = gereArquivo.recuperaDados()
                 historico.append([frase, resultado, "texto -> morse"])
@@ -64,6 +66,8 @@ Escolha uma opção:
                     break
             except KeyError as e:
                 print(f"CARACTER INVALIDO:{e}, tente novamente ")
+            except EOFError:
+                break
 
     ### Traduzir morce ###
     elif opcao == 2:
@@ -79,7 +83,8 @@ Escolha uma opção:
                 break
             except KeyError as a:
                 print(f"CARACTER IVALIDO: {a}, tente novamente")
-
+            except EOFError:
+                break
 
     elif opcao == 3:
         historico = gereArquivo.recuperaDados()

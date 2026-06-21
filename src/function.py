@@ -1,5 +1,5 @@
 from os import system, name
-import platform, time, threading, subprocess
+import platform, time, subprocess
 
 ##########################
 #### BIBLIOTECA MORSE ####
@@ -44,11 +44,6 @@ def limpar_terminal():
     except:
         pass
 
-#####################
-## NAO FUNCIONANDO ##
-#####################
-
-
 def beep(duracao):
     if platform.system() == "Windows": # verifica se o sistema é windows ou linux/mac
         import winsound
@@ -57,6 +52,7 @@ def beep(duracao):
     else:
         subprocess.Popen(
             ["play", "-n", "synth", str(duracao), "sine", "700"],
+            stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL
         )
@@ -74,10 +70,6 @@ def reproduzir_morse(codigo):
                     beep(0.3)
                 time.sleep(0.1)
             time.sleep(0.3)
-
-def reproduzir_morse_async(codigo):
-    t = threading.Thread(target=reproduzir_morse, args=(codigo,))
-    t.start()
 
 #########################
 ## class para traduzir ##
